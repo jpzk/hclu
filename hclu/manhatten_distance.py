@@ -29,6 +29,6 @@ class ManhattenDistance(DistanceFunction):
     def distance(self, data1, data2):
         distance = 0
         for i in range(0, len(data1)):
-            distance += data1[i] - data2[i]
+            distance += abs(data1[i] - data2[i])
 
         return distance
