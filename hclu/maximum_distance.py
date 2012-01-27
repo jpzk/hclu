@@ -29,6 +29,6 @@ class MaximumDistance(DistanceFunction):
     def distance(self, data1, data2):
         distances = []
         for i in range(0, len(data1)):
-            distances.append(data1[i] - data2[i])
+            distances.append(abs(data1[i] - data2[i]))
 
         return max(distances)
