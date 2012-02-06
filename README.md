@@ -1,19 +1,20 @@
 # hclu 
 
-Hierarchical clustering for Python 2.7
+Hierarchical clustering for Python 2.7. It's not yet ready for use, but you'll be able to cluster data sets via command-line.
 
-## Supported methods 
+<pre>
+usage: hclu [-h] -i I 
+  -m {single-linkage,complete-linkage,group-average,centroid} 
+  -d {euclidean,quadratic-euclidean,manhatten,maximum}
 
-- Single-Linkage
-- Complete-Linkage 
-- Centroid-based  
-- Group-Average-Linkage
+hierachical clustering
 
-## Supported distance functions
-- Euclidean distance
-- Quadratic Euclidean distance
-- Manhatten distance 
-- Maximum distance
+optional arguments:
+  -h, --help            show this help message and exit
+  -i I                  CSV file with data set to cluster
+  -m {single-linkage,complete-linkage,group-average,centroid}
+  -d {euclidean,quadratic-euclidean,manhatten,maximum}
+</pre>
 
 ## Next-Best-Merge Array O(n^2) and Efficient HAC Algorithm O(n^2*log(n))
 
