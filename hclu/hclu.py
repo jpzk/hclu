@@ -24,7 +24,10 @@ import traceback
 import sys
 import datetime
 import random
+import argparse
+import string 
 
+from sets import Set
 from strategy import Strategy
 from data_file import DataFile
 from data_element import DataElement
@@ -55,7 +58,7 @@ class Hclu(object):
     # \pre filename encodes existing file.
     # \post data is loaded.
     # \throw HcluException { throws if loading data failed. }
-    def load_data(self, filename):
+    def load_data(self, filename, cluster_indices):
         """This method is used to load data using CSV format."""
 
         if(not isinstance(filename, str)):
@@ -71,18 +74,27 @@ class Hclu(object):
                 tmp_row.append(datarow)
 
             data_file.attributes = tmp_row[0]
+
+            indices = Set(range(0, len(tmp_row[0])))
+            ignored_indices = indices - Set(cluster_indices)            
+
             for i in xrange(1, len(tmp_row)):
-                tmp_data = []
-                
-                # Convert string values to float
-                for element in tmp_row[i][2:]:
-                    tmp_data.append(float(element))
+                tmp_data = []               
+
+                is_cluster_index = lambda (idx, val) : idx in cluster_indices
+                is_ignored_index = lambda (idx, val) : idx in ignored_indices
+                strip = lambda (idx, val) : val
+
+                for element in map(strip,
+                    filter(is_cluster_index, enumerate(tmp_row[i]))):                    
+                    tmp_data.append(float(element))    
                     
                 # Generating and appending Data Element
                 data_file.elements.append(DataElement(
                     np.array(tmp_data), 
-                    tmp_row[i][:2], 
-                    data_file.attributes[:2])) 
+                    map(strip,filter(is_ignored_index, enumerate(tmp_row[i]))),  
+                    map(strip,filter(is_ignored_index,\
+                        enumerate(data_file.attributes)))))
 
         except Exception:
             traceback.print_exc(file=sys.stdout)
@@ -142,3 +154,16 @@ class Hclu(object):
             end_time,
             complete_runtime,
             strategy.clustering))
+
+# Here starts command line argument parsing
+
+parser = argparse.ArgumentParser(prog='hclu', description='hierachical clustering')
+
+methods = ["single-linkage", "complete-linkage", "group-average", "centroid"]
+distances = ["euclidean", "quadratic-euclidean", "manhatten", "maximum"]
+
+parser.add_argument('-i', required=True, help='file with data set to cluster')
+parser.add_argument('-m', required=True, type=complex, choices=methods)
+parser.add_argument('-d', required=True, type=complex, choices=distances)
+
+parser.parse_args()
