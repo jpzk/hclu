@@ -11,7 +11,7 @@ hierachical clustering
 
 optional arguments:
   -h, --help            show this help message and exit
-  -i I                  file with data set to cluster
+  -i I                  CSV file with data set to cluster
   -a A                  indices of attributes to cluster e.g. 0,3,2
   -m {single-linkage,complete-linkage,group-average,centroid}
   -d {euclidean,quadratic-euclidean,manhatten,maximum}
