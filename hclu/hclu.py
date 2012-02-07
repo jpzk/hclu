@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 """
 This file is part of hclu.
 
@@ -33,6 +35,20 @@ from data_file import DataFile
 from data_element import DataElement
 from hclu_exception import HcluException
 from clustering_run import ClusteringRun
+
+# method strategies
+
+from single_linkage_nbm import SingleLinkageNbm
+from complete_linkage_ehac import CompleteLinkageEfficientHAC
+from group_average_linkage_optimized import GroupAverageLinkageOptimized
+from centroid_linkage_optimized import CentroidLinkageOptimized 
+
+# distance strategies
+
+from euclidean_distance import EuclideanDistance
+from quadratic_euclidean_distance import QuadraticEuclideanDistance
+from maximum_distance import MaximumDistance 
+from manhatten_distance import ManhattenDistance
 
 # \file hclu.py
 # \brief This is the main module containing the Hclu facade.
@@ -157,13 +173,40 @@ class Hclu(object):
 
 # Here starts command line argument parsing
 
+hclu = Hclu()
+
 parser = argparse.ArgumentParser(prog='hclu', description='hierachical clustering')
 
-methods = ["single-linkage", "complete-linkage", "group-average", "centroid"]
-distances = ["euclidean", "quadratic-euclidean", "manhatten", "maximum"]
+methods = ['single-linkage', 'complete-linkage', 'group-average', 'centroid']
+distances = ['euclidean', 'quadratic-euclidean', 'manhatten', 'maximum']
 
-parser.add_argument('-i', required=True, help='file with data set to cluster')
-parser.add_argument('-m', required=True, type=complex, choices=methods)
-parser.add_argument('-d', required=True, type=complex, choices=distances)
+method_strategies = {
+    'single-linkage': SingleLinkageNbm, 
+    'complete-linkage': CompleteLinkageEfficientHAC,
+    'group-average': GroupAverageLinkageOptimized,
+    'centroid': CentroidLinkageOptimized} 
 
-parser.parse_args()
+distance_strategies = {
+    'euclidean': EuclideanDistance,
+    'quadratic-euclidean': QuadraticEuclideanDistance,
+    'manhatten': ManhattenDistance,
+    'maximum': MaximumDistance} 
+
+parser.add_argument('-i',\
+    required=True, help='file with data set to cluster')
+
+parser.add_argument('-a',\
+    required=True, help='indices of attributes to cluster e.g. 0,3,2')
+
+parser.add_argument('-m', required=True, choices=methods)
+parser.add_argument('-d', required=True, choices=distances)
+
+parameters = vars(parser.parse_args())
+
+distance_strategy = distance_strategies.get(parameters['d'])
+method_strategy = method_strategies.get(parameters['m'])
+cluster_indices = map(lambda c : int(c), parameters['a'].split(','))
+
+hclu.load_data(parameters['i'], cluster_indices)
+hclu.cluster(method_strategy(distance_strategy()))
+

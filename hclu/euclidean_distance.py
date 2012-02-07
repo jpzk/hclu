@@ -19,13 +19,13 @@ from numpy import linalg
 from distance_function import DistanceFunction
 import math
 
-# \file euclidianDistance.py
+# \file euclidean_distance.py
 # \brief This is the euclidian distance function between two vectors
 # \author Bjoern Borgmann <bjoern.borgmann@uni-oldenburg.de>
 # \author Jendrik Poloczek <jendrik.poloczek@uni-oldenburg.de> 
-class EuclidianDistance(DistanceFunction):
+class EuclideanDistance(DistanceFunction):
     
-    description = "Euclidian Distance"
+    description = "Euclidean Distance"
     
     def distance(self, data1, data2):
         return linalg.norm(data1-data2)

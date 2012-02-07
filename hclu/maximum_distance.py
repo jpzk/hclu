@@ -15,9 +15,10 @@ You should have received a copy of the GNU General Public License
 along with hclu.  If not, see <http://www.gnu.org/licenses/>.
 """
 
+import math
+
 from numpy import linalg 
 from distance_function import DistanceFunction
-import math
 
 # \file maximum_distance.py
 # \brief This is the maximum distance function between two vectors

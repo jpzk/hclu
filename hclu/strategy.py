@@ -30,7 +30,7 @@ from cluster import Cluster
 class Strategy(object):
     """This class is a strategy base class for clustering methods."""        
 
-    print_mod = 10
+    print_mod = 1
 
     def __init__(self, distance_function):
         if (not isinstance(distance_function, DistanceFunction)):
@@ -86,7 +86,11 @@ class Strategy(object):
         self.level_counter += 1
         
         if (self.level_counter % self.print_mod == 0):
-            self.print_message("Level "+str(self.level_counter)+": Merging "+str(index1)+" with "+str(index2)+" Sim is "+str(sim))
+            self.print_message("Level " +\
+                str(self.level_counter) +\
+                ": Merging "+str(index1)+\
+                " with " + str(index2) +\
+                " Sim is "+str(sim))
         
         # Copy latest level
         level = self.clustering[len(self.clustering) - 1].copy()

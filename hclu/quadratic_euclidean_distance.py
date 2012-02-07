@@ -19,13 +19,13 @@ from numpy import linalg
 from distance_function import DistanceFunction
 import math
 
-# \file quadratic_euclidian_distance.py
-# \brief This is the quadratic euclidian distance function between two vectors
+# \file quadratic_euclidean_distance.py
+# \brief This is the quadratic euclidean distance function between two vectors
 # \author Bjoern Borgmann <bjoern.borgmann@uni-oldenburg.de>
 # \author Jendrik Poloczek <jendrik.poloczek@uni-oldenburg.de> 
-class QuadraticEuclidianDistance(DistanceFunction):
+class QuadraticEuclideanDistance(DistanceFunction):
     
-    description = "Quadratic Euclidian Distance"
+    description = "Quadratic Euclidean Distance"
     
     def distance(self, data1, data2):
         return linalg.norm(data1-data2)**2
