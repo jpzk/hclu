@@ -1,17 +1,18 @@
 # hclu 
 
-Hierarchical clustering for Python 2.7. It's not yet ready for use, but you'll be able to cluster data sets via command-line.
+Hierarchical clustering in Python. It's not yet ready for use, but you'll be able to cluster data sets via command-line.
 
 <pre>
-usage: hclu [-h] -i I 
-  -m {single-linkage,complete-linkage,group-average,centroid} 
-  -d {euclidean,quadratic-euclidean,manhatten,maximum}
+usage: hclu [-h] -i I -a A -m
+            {single-linkage,complete-linkage,group-average,centroid} -d
+            {euclidean,quadratic-euclidean,manhatten,maximum}
 
 hierachical clustering
 
 optional arguments:
   -h, --help            show this help message and exit
-  -i I                  CSV file with data set to cluster
+  -i I                  file with data set to cluster
+  -a A                  indices of attributes to cluster e.g. 0,3,2
   -m {single-linkage,complete-linkage,group-average,centroid}
   -d {euclidean,quadratic-euclidean,manhatten,maximum}
 </pre>
