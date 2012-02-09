@@ -17,9 +17,9 @@ optional arguments:
   -d {euclidean,quadratic-euclidean,manhatten,maximum}
 </pre>
 
-## Next-Best-Merge Array O(n^2) and Efficient HAC Algorithm O(n^2*log(n))
+## Next-Best-Merge Array and Efficient HAC Algorithm 
 
-implements NBM algorithm for Single-Linkage and HAC, GAAC algorithm described in http://nlp.stanford.edu/IR-book/html/htmledition/time-complexity-of-hac-1.html
+implements NBM algorithm O(n^2) for Single-Linkage and EHAC GAAC algorithm O(n^2*log(n)), GAAC algorithm described in http://nlp.stanford.edu/IR-book/html/htmledition/time-complexity-of-hac-1.html
 
 ## License 
 
