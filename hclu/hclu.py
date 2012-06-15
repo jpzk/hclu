@@ -19,15 +19,12 @@ along with hclu.  If not, see <http://www.gnu.org/licenses/>.
 
 """This is the main module containing the Hclu facade"""
 
-import copy
 import csv
 import numpy as np
 import traceback
 import sys
 import datetime
-import random
 import argparse
-import string 
 
 from sets import Set
 from strategy import Strategy

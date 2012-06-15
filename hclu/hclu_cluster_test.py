@@ -15,7 +15,12 @@ You should have received a copy of the GNU General Public License
 along with hclu.  If not, see <http://www.gnu.org/licenses/>.
 """
 
+import copy
+import random
+
 from hclu import Hclu
+from strategy import Strategy
+from hclu_exception import HcluException
 
 # \file hclu.py
 # \brief This is the main module containing the Hclu facade.
